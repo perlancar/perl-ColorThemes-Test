@@ -34,8 +34,12 @@ sub list_items {
 
 sub get_item_color {
     my ($self, $name, $args) = @_;
-    return $self->{_cache}{$name} if defined $self->{_cache}{$name};
-    $self->{_cache}{$name} = rand_rgb_color();
+    if ($self->{args}{cache}) {
+        return $self->{_cache}{$name} if defined $self->{_cache}{$name};
+        $self->{_cache}{$name} = rand_rgb_color();
+    } else {
+        rand_rgb_color();
+    }
 }
 
 1;
