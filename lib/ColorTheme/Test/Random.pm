@@ -16,6 +16,10 @@ our %THEME = (
     summary => 'A color theme which gives random colors',
     dynamic => 1,
     args => {
+        cache => {
+            schema => 'bool*',
+            default => 1,
+        },
         # TODO: whether to set random foreground color or not (default 1)
         # TODO: whether to set random background color or not (default 0)
     },
@@ -30,7 +34,8 @@ sub list_items {
 
 sub get_item_color {
     my ($self, $name, $args) = @_;
-    rand_rgb_color();
+    return $self->{_cache}{$name} if defined $self->{_cache}{$name};
+    $self->{_cache}{$name} = rand_rgb_color();
 }
 
 1;
