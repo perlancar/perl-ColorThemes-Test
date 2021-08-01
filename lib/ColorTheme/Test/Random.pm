@@ -32,7 +32,7 @@ our %THEME = (
 sub list_items {
     my $self = shift;
 
-    my @list = [0 .. ($self->{args}{num}//5)-1];
+    my @list = 0 .. ($self->{args}{num}//5)-1;
     wantarray ? @list : \@list;
 }
 
