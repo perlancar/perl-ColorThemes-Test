@@ -20,6 +20,10 @@ our %THEME = (
             schema => 'bool*',
             default => 1,
         },
+        num => {
+            schema => 'posint*',
+            default => 5,
+        },
         # TODO: whether to set random foreground color or not (default 1)
         # TODO: whether to set random background color or not (default 0)
     },
@@ -28,7 +32,7 @@ our %THEME = (
 sub list_items {
     my $self = shift;
 
-    my @list = [];
+    my @list = [0 .. ($self->{args}{num}//5)-1];
     wantarray ? @list : \@list;
 }
 
