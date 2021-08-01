@@ -1,4 +1,4 @@
-package ColorTheme::Test::RandomANSI256;
+package ColorTheme::Test::RandomANSI256BG;
 
 # AUTHORITY
 # DATE
@@ -11,7 +11,7 @@ use parent 'ColorThemeBase::Base';
 
 our %THEME = (
     v => 2,
-    summary => 'A color theme which gives random 256-color ANSI codes',
+    summary => 'A color theme which gives random 256-color background ANSI codes',
     dynamic => 1,
     args => {
         cache => {
@@ -22,13 +22,11 @@ our %THEME = (
             schema => 'posint*',
             default => 5,
         },
-        # TODO: whether to set random foreground color or not (default 1)
-        # TODO: whether to set random background color or not (default 0)
     },
 );
 
 sub _rand_ansi256 {
-    +{ansi_fg=>"\e[38;5;".int(rand()*256)."m"};
+    +{ansi_bg=>"\e[48;5;".int(rand()*256)."m"};
 }
 
 sub list_items {
@@ -55,8 +53,8 @@ sub get_item_color {
 
 Show a color swatch of this theme:
 
- % show-color-theme-swatch Test/RandomANSI256
+ % show-color-theme-swatch Test/RandomANSI256BG
 
 Specify number of colors:
 
- % show-color-theme-swatch Test/RandomANSI256=num,10
+ % show-color-theme-swatch Test/RandomANSI256BG=num,10

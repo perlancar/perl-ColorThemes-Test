@@ -1,4 +1,4 @@
-package ColorTheme::Test::RandomANSI16;
+package ColorTheme::Test::RandomRGBFG;
 
 # AUTHORITY
 # DATE
@@ -9,9 +9,11 @@ use strict;
 use warnings;
 use parent 'ColorThemeBase::Base';
 
+use Color::RGB::Util qw(rand_rgb_color);
+
 our %THEME = (
     v => 2,
-    summary => 'A color theme which gives random 16-color ANSI codes',
+    summary => 'A color theme which gives random RGB foreground colors',
     dynamic => 1,
     args => {
         cache => {
@@ -22,14 +24,8 @@ our %THEME = (
             schema => 'posint*',
             default => 5,
         },
-        # TODO: whether to set random foreground color or not (default 1)
-        # TODO: whether to set random background color or not (default 0)
     },
 );
-
-sub _rand_ansi16 {
-    +{ansi_fg=>"\e[".(30+int(rand()*8)).(rand() > 0.5 ? ";1":"")."m"};
-}
 
 sub list_items {
     my $self = shift;
@@ -42,9 +38,9 @@ sub get_item_color {
     my ($self, $name, $args) = @_;
     if ($self->{args}{cache}) {
         return $self->{_cache}{$name} if defined $self->{_cache}{$name};
-        $self->{_cache}{$name} = _rand_ansi16();
+        $self->{_cache}{$name} = rand_rgb_color();
     } else {
-        _rand_ansi16();
+        rand_rgb_color();
     }
 }
 
@@ -55,8 +51,8 @@ sub get_item_color {
 
 Show a color swatch of this theme:
 
- % show-color-theme-swatch Test/RandomANSI16
+ % show-color-theme-swatch Test/RandomRGBFG
 
 Specify number of colors:
 
- % show-color-theme-swatch Test/RandomANSI16=num,10
+ % show-color-theme-swatch Test/RandomRGBFG=num,10

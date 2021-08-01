@@ -1,4 +1,4 @@
-package ColorTheme::Test::Random;
+package ColorTheme::Test::RandomRGBBG;
 
 # AUTHORITY
 # DATE
@@ -13,7 +13,7 @@ use Color::RGB::Util qw(rand_rgb_color);
 
 our %THEME = (
     v => 2,
-    summary => 'A color theme which gives random colors',
+    summary => 'A color theme which gives random RGB background colors',
     dynamic => 1,
     args => {
         cache => {
@@ -24,8 +24,6 @@ our %THEME = (
             schema => 'posint*',
             default => 5,
         },
-        # TODO: whether to set random foreground color or not (default 1)
-        # TODO: whether to set random background color or not (default 0)
     },
 );
 
@@ -40,9 +38,9 @@ sub get_item_color {
     my ($self, $name, $args) = @_;
     if ($self->{args}{cache}) {
         return $self->{_cache}{$name} if defined $self->{_cache}{$name};
-        $self->{_cache}{$name} = rand_rgb_color();
+        $self->{_cache}{$name} = {bg=>rand_rgb_color()};
     } else {
-        rand_rgb_color();
+        return {bg=>rand_rgb_color()};
     }
 }
 
@@ -53,8 +51,8 @@ sub get_item_color {
 
 Show a color swatch of this theme:
 
- % show-color-theme-swatch Test/Random
+ % show-color-theme-swatch Test/RandomRGBBG
 
 Specify number of colors:
 
- % show-color-theme-swatch Test/Random=num,10
+ % show-color-theme-swatch Test/RandomRGBBG=num,10
