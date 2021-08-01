@@ -50,3 +50,13 @@ sub get_item_color {
 
 1;
 # ABSTRACT:
+
+=head1 SYNOPSIS
+
+Show a color swatch of this theme:
+
+ % show-color-theme-swatch Test/RandomANSI16
+
+Specify number of colors:
+
+ % show-color-theme-swatch Test/RandomANSI16=num,10

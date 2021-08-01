@@ -48,3 +48,13 @@ sub get_item_color {
 
 1;
 # ABSTRACT:
+
+=head1 SYNOPSIS
+
+Show a color swatch of this theme:
+
+ % show-color-theme-swatch Test/Random
+
+Specify number of colors:
+
+ % show-color-theme-swatch Test/Random=num,10
